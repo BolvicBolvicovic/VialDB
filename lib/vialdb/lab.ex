@@ -25,16 +25,14 @@ defmodule VIALDB.Lab do
   end
 
   @impl true
-  def handle_call({:lookup, name}, _from, state) do
-    {names, _} = state
-    {:reply, Map.fetch(names, name), names}
+  def handle_call({:lookup, name}, _from, {names, refs}) do
+    {:reply, Map.fetch(names, name), {names, refs}}
   end
 
   @impl true
-  def handle_call({:create, name}, _from, state) do
-    {names, refs} = state
+  def handle_call({:create, name}, _from, {names, refs}) do
     if Map.has_key?(names, name) do
-      {:reply, :error, state}
+      {:reply, :error, {names, refs}}
     else
       {:ok, beacker} = VIALDB.Beacker.start_link([])
       ref = Process.monitor(beacker)

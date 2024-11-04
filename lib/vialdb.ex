@@ -3,18 +3,11 @@ defmodule VIALDB do
   Documentation for `VIALDB`.
   """
 
-  @doc """
-  Hello world.
+  use Application
 
-  ## Examples
-
-      iex> VIALDB.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  @impl true
+  def start(_type, _args) do
+    VIALDB.Supervisor.start_link(name: VIALDB.Supervisor)
   end
 
-  def hello(you), do: "hello #{you}"
 end
