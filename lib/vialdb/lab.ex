@@ -34,7 +34,7 @@ defmodule VIALDB.Lab do
     if Map.has_key?(names, name) do
       {:reply, :error, {names, refs}}
     else
-      {:ok, beacker} = VIALDB.Beacker.start_link([])
+      {:ok, beacker} = DynamicSupervisor.start_child(VIALDB.BeackerSupervisor, VIALDB.Beacker)
       ref = Process.monitor(beacker)
       refs = Map.put(refs, ref, name)
       names = Map.put(names, name, beacker)
@@ -43,12 +43,11 @@ defmodule VIALDB.Lab do
   end
 
   @impl true
-  def handle_info({:DOWN, ref, :process, _pid, _reason}, {names, refs}) do 
+  def handle_info({:DOWN, ref, :process, _pid, _reason}, {names, refs}) do
     {name, refs} = Map.pop(refs, ref)
     names = Map.delete(names, name)
     {:noreply, {names, refs}}
   end
-
 
   @impl true
   def handle_info(msg, state) do

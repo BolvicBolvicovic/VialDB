@@ -1,5 +1,5 @@
 defmodule VIALDB.Beacker do
-  use Agent
+  use Agent, restart: :temporary
 
   @doc """
   Start a new beacker.
@@ -28,5 +28,4 @@ defmodule VIALDB.Beacker do
   def delete(beacker, key) do
     Agent.get_and_update(beacker, &Map.pop(&1, key))
   end
-
 end

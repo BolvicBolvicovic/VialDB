@@ -8,10 +8,10 @@ defmodule VIALDB.Supervisor do
   @impl true
   def init(:ok) do
     children = [
-      {VIALDB.Lab, name: VIALDB.Lab},
-      {DynamicSupervisor, name: VIALDB.BeackerSupervisor, strategy: :one_for_one}
+      {DynamicSupervisor, name: VIALDB.BeackerSupervisor, strategy: :one_for_one},
+      {VIALDB.Lab, name: VIALDB.Lab}
     ]
 
-    Supervisor.init(children, strategy: :one_for_one)
+    Supervisor.init(children, strategy: :one_for_all)
   end
 end

@@ -29,5 +29,4 @@ defmodule VIALDB.LabTest do
     Agent.stop(beacker, :shutdown)
     assert VIALDB.Lab.lookup_beacker(lab, "Bad Beacker for Bad Lang") == :error
   end
-
 end
