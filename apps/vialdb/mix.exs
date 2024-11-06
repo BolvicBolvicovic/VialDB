@@ -6,6 +6,10 @@ defmodule VIALDB.MixProject do
       app: :vialdb,
       version: "0.1.0",
       elixir: "~> 1.17",
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -24,7 +28,6 @@ defmodule VIALDB.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:plug, "~> 1.0"}
     ]
   end
 end

@@ -28,7 +28,7 @@ defmodule VIALDB.LabTest do
     assert {:ok, beacker} = VIALDB.Lab.lookup_beacker(lab, "Bad Beacker for Bad Lang")
 
     Agent.stop(beacker, :shutdown)
-    
+    :timer.sleep(1000)    
     assert VIALDB.Lab.lookup_beacker(lab, "Bad Beacker for Bad Lang") == :error
   end
 end
